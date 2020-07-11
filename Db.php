@@ -3,9 +3,12 @@
  */
 class Db
 {
+	
+ 	use TSingleton;
+	
 	protected $dbh;
 	
-	public function __construct()
+	protected function __construct()
 	{
 		$this->dbh = new PDO('mysql:host=127.0.0.1;dbname=foo', 'root', '');
 	}
