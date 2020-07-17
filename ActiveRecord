@@ -1,0 +1,25 @@
+abstract class ActiveRecord extends Model
+{
+
+  protected function insert()
+	{
+  }
+  
+  protected function update()
+	{
+  }
+
+	public function beforeSave(){}
+
+	public function afterSave(){}	
+
+	public function save()
+	{
+		$this->beforeSave();
+		$method = $this->isNew() ? 'insert' : 'update';
+		$res = $this->$method();
+		$this->afterSave();
+		return $res;
+	}
+
+}
