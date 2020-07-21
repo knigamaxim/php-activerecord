@@ -1,9 +1,21 @@
 abstract class ActiveRecord extends Model
 {
 
-  protected function insert()
-	{
-  }
+protected function insert()
+{
+	$columns = [];
+	$values = [];
+	foreach ($this as $k => $v) {
+		if($k == 'id' || $k == 'extraFields') continue;
+		$columns[] = $k;
+		$values[':'.$k] = $v;
+	}	
+	$sql = 'INSERT INTO ' . static::TABLE . 
+		'('. implode(', ', $columns) .') values('
+		. implode(', ', array_keys($values)) . ')';
+	$db = new Db;
+	return $db->execute($sql, $values);
+}
   
   protected function update()
 	{
