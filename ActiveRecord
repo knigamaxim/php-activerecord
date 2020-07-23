@@ -17,9 +17,27 @@ protected function insert()
 	return $db->execute($sql, $values);
 }
   
-  protected function update()
-	{
-  }
+    protected function update()
+    {
+        $columns = [];
+        $values = [];
+        foreach ($this->data as $k => $v) {
+            if ('id' == $k) {
+                continue;
+            }
+            $columns[] = $k;
+            $values[':'.$k] = $this->data[$k];
+            $setParams .= $k.'=:'.$k.', ';
+        }
+        $setParams = trim($setParams, ', ');
+        $sql = 'UPDATE ' . static::$table . '
+               SET ' . $setParams . 
+               ' WHERE id=:id';
+        $values['id'] = $this->id;
+        $db = Db::instance();
+        if($db->execute($sql, $values)) return true;
+        return false;
+    }
 
 	public function beforeSave(){}
 
