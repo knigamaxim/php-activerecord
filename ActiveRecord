@@ -39,6 +39,12 @@ protected function insert()
         return false;
     }
 
+
+	protected function isNew()
+	{
+		return empty($this->id);
+	}
+	
 	public function beforeSave(){}
 
 	public function afterSave(){}	
