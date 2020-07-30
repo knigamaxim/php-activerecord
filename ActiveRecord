@@ -57,5 +57,16 @@ protected function insert()
 		$this->afterSave();
 		return $res;
 	}
+	
+	public static function findAll()
+	{
+		$db = new Db;
+		return $db->query(
+			'SELECT * FROM ' . static::TABLE, 
+			[], 
+			static::class
+		);
+
+	}
 
 }
