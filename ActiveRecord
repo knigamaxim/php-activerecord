@@ -57,7 +57,17 @@ protected function insert()
 		$this->afterSave();
 		return $res;
 	}
-	
+
+    public static function findOne($id)
+    {
+        $db = Db::instance();
+        return $db->query(
+            'SELECT * FROM ' . static::$table . ' WHERE id=:id',
+            [':id' => $id], 
+            static::class
+        )[0];
+    }
+
 	public static function findAll()
 	{
 		$db = new Db;
