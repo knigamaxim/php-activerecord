@@ -8,9 +8,10 @@ class Db
 	
 	protected $dbh;
 	
-	protected function __construct()
+	public function __construct()
 	{
 		$this->dbh = new PDO('mysql:host=127.0.0.1;dbname=foo', 'root', '');
+		$this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
 	}
 
         public function execute($sql, $params = [])
