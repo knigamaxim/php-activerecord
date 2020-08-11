@@ -1,6 +1,23 @@
 abstract class ActiveRecord extends Model
 {
 
+	protected $extraFields = [];
+
+	public function __get($k)
+	{
+		return $this->$k ?? $this->extraFields[$k];
+	}
+
+	public function __set($k, $v)
+	{
+		if(!property_exists($this, $k)) {
+			$this->extraFields[$k] = $v;
+		} else {
+			$this->$k = $v;
+		}
+		
+	}
+
 protected function insert()
 {
 	$columns = [];
