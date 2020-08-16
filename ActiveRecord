@@ -18,6 +18,11 @@ abstract class ActiveRecord extends Model
 		
 	}
 
+	public function __isset($v)
+	{
+		return isset($this->$v);
+	}
+
 protected function insert()
 {
 	$columns = [];
