@@ -100,5 +100,15 @@ protected function insert()
 		);
 
 	}
+	
+    public static function load(array $arr)
+    {
+        $model = new static;
+        foreach ($arr as $k => $v) {
+            $model->data[$k] = $v;
+            $model->$k = $v;
+        }
+        return $model;
+    }	
 
 }
