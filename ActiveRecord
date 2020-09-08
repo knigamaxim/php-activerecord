@@ -1,6 +1,8 @@
 abstract class ActiveRecord extends Model
 {
 
+     protected static $table = '';
+
 	protected $extraFields = [];
 
 	public function __get($k)
@@ -100,7 +102,16 @@ protected function insert()
 		);
 
 	}
-	
+
+    public static function getCnt()
+    {
+        $db = Db::instance();
+        return $db->query(
+            'SELECT COUNT(*) as `cnt` FROM ' . static::$table, [],
+            static::class
+        )[0]->cnt;
+    }
+
     public static function load(array $arr)
     {
         $model = new static;
