@@ -1,4 +1,4 @@
-abstract class ActiveRecord extends Model
+class ActiveRecord
 {
 
      protected static $table = '';
